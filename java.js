@@ -1,23 +1,70 @@
-let firstValue;
-let secondValue;
-let operator;
+//Object containing functions to perform mathematical calculations
 
-function add(firstNum, secondNum) {
+let math = {
+add: function (firstNum, secondNum) {
     return firstNum + secondNum;
-}
+},
 
-function subtract(firstNum, secondNum) {
+subtract: function (firstNum, secondNum) {
     return firstNum - secondNum;
-}
+},
 
-function multiply(firstNum, secondNum) {
+multiply: function (firstNum, secondNum) {
     return firstNum * secondNum;
-}
+},
 
-function divide(firstNum, secondNum) {
+divide: function (firstNum, secondNum) {
     return firstNum / secondNum;
-}
+},
 
-function operate(firstNum, secondNum, operator) {
+percent: function (firstNum) {
+    return firstNum / 100;
+},
+
+changeSign: function (firstNum) {
+    return -(firstNum);
+},
+
+operate: function (firstNum, secondNum, operator) {
     return operator(firstNum, secondNum);
+},
 }
+//Logic for clearing display 
+const clear = document.querySelector("#clear");
+
+clear.addEventListener("click", () => {
+    displayValue.textContent = "";
+});
+
+
+//Logic for updating the display with numbers clicked
+const displayValue = document.querySelector("#displayValue");
+
+const numbers = document.querySelectorAll(".number");
+
+numbers.forEach((num) => {
+    num.addEventListener("click", () => {
+        displayValue.textContent += num.textContent;
+    });
+});
+
+
+//Logic for performing operations
+const operators = document.querySelectorAll(".operator");
+
+let firstOperand;
+let secondOperand;
+let selectedOperator;
+
+//Each operator gets the first operand and the operation to be performed
+operators.forEach((operator) => {
+    operator.addEventListener("click", () => {
+        firstOperand = displayValue.textContent;
+        selectedOperator = operator.id;
+    });
+});
+
+
+
+
+
