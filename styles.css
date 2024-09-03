@@ -29,7 +29,7 @@
     background-color: #000000;
 }
 
-#display {
+#displayField {
     display: flex;
     justify-content: flex-end;
     background-color: #D5D3D4;
@@ -37,7 +37,7 @@
     margin-bottom: 2px;
 }
 
-#displayValue {
+#display {
     align-self: flex-end;
     padding: 8px;
     font-size: 48px;
