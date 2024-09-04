@@ -1,28 +1,42 @@
-//Logic for updating the display with numberKeys clicked
+//Logic for updating the display with number clicked
 const display = document.querySelector("#display");
 
-let displayValue;
+function limitDisplay(value) {
+    return +parseFloat(value).toFixed(14);
+}
+
+function updateDisplay (element) {
+    displayValue += element.textContent;
+    display.textContent = limitDisplay(displayValue);
+}
+
+let displayValue = "";
 
 const numberKeys = document.querySelectorAll(".number");
- numberKeys.forEach((num) => {
-    num.addEventListener("click", () => {
-        display.textContent += num.textContent;
-        displayValue = display.textContent;
-    });
-});
 
-const decimalKey = document.querySelector("#decimal")
+numberKeys.forEach((numKey) => {
+    if (numKey.id == "decimal") {
+        numKey.addEventListener("click", () => {
+            if (!displayValue.includes(".")) {
+                updateDisplay(numKey);
+            }
+        })
+    } else { 
+        numKey.addEventListener("click", () => updateDisplay(numKey))
+    };
+});
 
 
 //Logic for clearing display 
-const clear = document.querySelector("#clear");
+const clearKey = document.querySelector("#clear");
+
 const clearDisplay = () => {
     display.textContent = ""
     displayValue = "";
     firstOperand = "";
     secondOperand = ""; 
 }
-clear.addEventListener("click", () => clearDisplay());
+clearKey.addEventListener("click", () => clearDisplay());
 
 //Object containing functions to perform operations
 let math = {
@@ -44,7 +58,7 @@ let math = {
 }
 
 
-//Variables for holding operands and operators for calculation
+//Variables for holding operands and operatorKeys for calculation
 let firstOperand;
 let secondOperand;
 let selectedOperator;
@@ -52,26 +66,27 @@ let selectedOperator;
 let operatorPressed;
 
 //Each operator gets the first operand and the operation to be performed, and then clears the display for the next operand. operatorPressed is set to true.
-const operators = document.querySelectorAll(".operator");
+const operatorKeys = document.querySelectorAll(".operator");
 
-operators.forEach((operator) => {
+operatorKeys.forEach((operator) => {
     operator.addEventListener("click", () => {
         firstOperand = displayValue;
+        displayValue = "";
         selectedOperator = operator.id;
         operatorPressed = true;
-        display.textContent = "";
     });
 });
 
-//The equals button gets the second operand and performs an operation if operatorPressed is true. Once the operation is performed, operatorPressed is set to false.
-const equals = document.querySelector("#equals");
+//The equalsKey button gets the second operand and performs an operation if operatorPressed is true. Once the operation is performed, operatorPressed is set to false.
+const equalsKey = document.querySelector("#equals");
 
-equals.addEventListener("click", () => {
+equalsKey.addEventListener("click", () => {
     secondOperand = displayValue;
 
     if (operatorPressed) {
         let result = math[selectedOperator](firstOperand,secondOperand);
-        display.textContent = displayValue = firstOperand = result;
+        firstOperand = displayValue = result;
+        display.textContent = limitDisplay(displayValue); 
         operatorPressed = false;
     };
 });
