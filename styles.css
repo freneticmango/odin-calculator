@@ -65,6 +65,10 @@ button {
     color: #14213d;
 }
 
+#divide {
+    flex: 0 25%
+}
+
 #zero {
     flex: 0 50%;
 }
