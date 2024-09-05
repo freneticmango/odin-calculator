@@ -171,7 +171,8 @@ function handleKeys(event) {
             backspace();
             break;
         case "Delete":
-            clearDisplay();
+            clearDisplay()
+            break;
     }
 
     // if (event.key == "=" || event.key == "Enter")
