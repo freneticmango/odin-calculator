@@ -112,9 +112,7 @@ function performOperation() {
     };
 }
 
-equalsKey.addEventListener("click", () => {
-    performOperation();
-});
+equalsKey.addEventListener("click", () => performOperation());
 
 
 //Changes the sign of the displayed value
@@ -174,19 +172,4 @@ function handleKeys(event) {
             clearDisplay()
             break;
     }
-
-    // if (event.key == "=" || event.key == "Enter")
-    //     performOperation();
-
-    // if (event.key == "%")
-    //     makePercent();
-
-    // if (event.key == "c")
-    //     changeSign();
-
-    // if (event.key == "Backspace")
-    //     backspace();
-
-    // if (event.key == "Delete")
-    //     clearDisplay();
 }
